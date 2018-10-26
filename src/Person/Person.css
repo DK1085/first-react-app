@@ -1,5 +1,5 @@
 .Person {
-    width: 60%;
+    width: 100%;
     margin: 19px auto;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
@@ -15,23 +15,52 @@
 
 #bla1{
     background-color: lightgreen;
-    width: 60%;
-    margin: 19px auto;
+    width: 100%;
+    margin: 0 auto;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
-    padding: 16px;
+    padding: 0px;
+    padding-bottom: 20px;
     text-align: center;
 }
 
 
 #bla2{
     background-color: lightblue;
-    width: 60%;
-    margin: 19px auto;
+    width: 100%;
+    margin: 0 auto;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
-    padding: 16px;
+    padding: 0px;
+    padding-bottom: 20px;
     text-align: center;
     
 
+}
+
+
+@media only screen and (max-width: 600px){
+    #bla1{
+        background-color: lightgreen;
+        width: 60%;
+        margin: 0 auto;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 3px #ccc;
+        padding: 16px;
+        text-align: center;
+        
+    }
+    
+    
+    #bla2{
+        background-color: lightblue;
+        width: 60%;
+        margin: 0 auto;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 3px #ccc;
+        padding: 16px;
+        text-align: center;
+        
+    
+    }
 }

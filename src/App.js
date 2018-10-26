@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import './Person/Person.css';
+import classez from './App.css';
+import classed from'./Person/Person.css';
 import Person from './Person/Person';
 
 
@@ -41,34 +41,31 @@ aliens[personIndex] = human;
 togglePersonHandler = () => {
     let doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
-
+    
 }
 
 
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      padding: '8px',
-      borderRadius: '5px'
-    }
+    
 
     let persons = null;
+    let btnClass = classez.myButt;
 
     if (this.state.showPersons) {
 
       persons = (
         <div>
           {this.state.persons.map((myArray, index) => {
+            
             return<Person
             click={() => this.deletePersonHandler(index)}
             name = {myArray.name}
             age = {myArray.age}
             key = {myArray.id}
             changed = {(event) => this.nameChangedHandler(event, myArray.id)}
-            id={myArray.id}
+            id={classed[myArray.id]}
           />
             
           })}
@@ -76,7 +73,7 @@ togglePersonHandler = () => {
           </div>
       );
 
-      style.backgroundColor = 'red';
+      btnClass=classez.Red;
 
       
       }
@@ -88,20 +85,19 @@ togglePersonHandler = () => {
 
     let classes = [];
     if (this.state.persons.length <= 1){
-      classes.push('red');
+      classes.push(classez.red); //we dont push strings as classes anymore now we are using modular css
     }
     if (this.state.persons.length === 0 ){
-      classes.push('bold');
+      classes.push(classez.bold);
     }
 
   
 
     return (
-      <div className="App">
+      <div className={classez.App}>
        <h1>Hi, I'm a React App</h1>
        <p className={classes.join(' ')}>This is working also</p>
-       <button
-       style = {style}
+       <button className = {btnClass}
        onClick={this.togglePersonHandler}>Toggle Persons</button>
         {persons}
         
