@@ -1,9 +1,16 @@
 import React from 'react';
+import './Person.css';
+import './../css-files/animate.css'
+
+
+
+
+
 
 const person  = (props) => {
-    return <div>
+    return <div id={props.id}>
         <p onClick={props.click}> I'm {props.name} and I am {props.age} years old!</p>
-        <input type="text" onChange={props.changed}/>
+        <input type="text" onChange={props.changed} value={props.name}/>
     </div>
 };
 

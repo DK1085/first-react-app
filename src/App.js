@@ -1,48 +1,113 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Person/Person.css';
 import Person from './Person/Person';
+
+
+
 
 class App extends Component {
   state = {
     persons: [
-      {name: 'Dan', age: 33},
-      {name: 'Emily', age: 28}
-    ]
+      {id: "bla1", name: 'Dan', age: 33},
+      { id: "bla2", name: 'Emily', age: 28}
+    ],
+    showPersons: false
   }
 
-switchNameHandler = (newName) => {
-    //console.log('was clicked');
-    // DONT DO THIS this.state.persons[0].name = 'Dhani';
-    this.setState({
-      persons: [
-        {name: newName, age: 33},
-        {name: 'Emily', age: 28}]
-  });
+deletePersonHandler = (personIndex) => {
+    const people = [...this.state.persons]
+    people.splice(personIndex, 1);
+    this.setState({persons: people})
 }
 
-nameChangedHandler = (event) => {
-  this.setState({
-    persons: [
-      {name: event.target.value, age: 33},
-      {name: 'Emily', age: 28}
-    ]
-  })
+nameChangedHandler = (event, id) => {
+const personIndex = this.state.persons.findIndex(p => {
+  return p.id === id;
+});
+
+const human = {
+  ...this.state.persons[personIndex]
+};
+
+human.name = event.target.value;
+
+const aliens = [...this.state.persons];
+aliens[personIndex] = human;
+
+  this.setState({persons: aliens})
 }
+
+togglePersonHandler = () => {
+    let doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+
+}
+
+
 
   render() {
+
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      padding: '8px',
+      borderRadius: '5px'
+    }
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+
+      persons = (
+        <div>
+          {this.state.persons.map((myArray, index) => {
+            return<Person
+            click={() => this.deletePersonHandler(index)}
+            name = {myArray.name}
+            age = {myArray.age}
+            key = {myArray.id}
+            changed = {(event) => this.nameChangedHandler(event, myArray.id)}
+            id={myArray.id}
+          />
+            
+          })}
+          
+          </div>
+      );
+
+      style.backgroundColor = 'red';
+
+      
+      }
+
+    
+
+
+    
+
+    let classes = [];
+    if (this.state.persons.length <= 1){
+      classes.push('red');
+    }
+    if (this.state.persons.length === 0 ){
+      classes.push('bold');
+    }
+
+  
+
     return (
       <div className="App">
        <h1>Hi, I'm a React App</h1>
-       <p>This is working also</p>
-       <button onClick={() => this.switchNameHandler('Dhani!')}>Switch Name</button>
-       <Person
-       name={this.state.persons[0].name}
-       age={this.state.persons[0].age}
-       click={this.switchNameHandler.bind(this, 'Dan!')}
-       changed={this.nameChangedHandler}/>
-       <Person
-       name={this.state.persons[1].name}
-       age={this.state.persons[1].age}/>
+       <p className={classes.join(' ')}>This is working also</p>
+       <button
+       style = {style}
+       onClick={this.togglePersonHandler}>Toggle Persons</button>
+        {persons}
+        
+          
+    
+       
       </div>
     );
   }
